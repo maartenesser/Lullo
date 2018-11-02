@@ -1,0 +1,34 @@
+﻿@model Lullo.Models.EatAtHome
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EatAtHome</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EatsAtHome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EatsAtHome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Guests)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guests)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

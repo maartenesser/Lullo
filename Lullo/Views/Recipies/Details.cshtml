@@ -1,0 +1,74 @@
+﻿@model Lullo.Models.Recepies.Recipies
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Recipies</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingredients)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ingredients)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrepareInstructions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrepareInstructions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kitchens)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kitchens)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfPeople)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfPeople)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PreparationTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PreparationTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
