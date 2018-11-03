@@ -156,6 +156,7 @@
     <Compile Include="Controllers\EatAtHomeController.cs" />
     <Compile Include="Controllers\GroceriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RecipiesController - Copy.cs" />
     <Compile Include="Controllers\RecipiesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -236,7 +237,7 @@
     <Content Include="Views\Recipies\Details.cshtml" />
     <Content Include="Views\Recipies\Edit.cshtml" />
     <Content Include="Views\Recipies\Index.cshtml" />
-    <Content Include="Views\Recipies\Search.cshtml" />
+    <Content Include="Views\Recipies\Index - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,16 +6,26 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
 @using (Html.BeginForm("Index", "Recipies", FormMethod.Get))
 {
     @Html.TextBox("search")
     <input type="submit" value="submit" />
+
 }
 
+<label for="Course Name">
+    <select name="CourseName">
+        <option>Select Name</option>
+        @*@foreach (var data in Model.CourseProperty)
+        {
+            <option @data.CourseId>@data.Course</option>
+        }*@
+    </select>
+</label>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
         <th>

@@ -75,7 +75,7 @@ namespace Lullo.Controllers
 
 
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             if (Session["UserID"] == null)
             {
@@ -84,7 +84,16 @@ namespace Lullo.Controllers
             }
             if ((bool)Session["IsAdmin"])
             {
-                return View(db.Users.ToList());
+
+                var usr = from u in db.Users select u;
+
+                if (!String.IsNullOrEmpty(search))
+                {
+                    //Searches in multiple columns
+                    usr = usr.Where(u => u.FirstName.Contains(search) || u.LastName.Contains(search) || u.Email.Contains(search));
+                }
+
+                return View(usr.ToList());
 
             }
 

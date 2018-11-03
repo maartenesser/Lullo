@@ -13,19 +13,19 @@ namespace Lullo.Models.Recepies
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Name of the recipe is required")]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Ingredients are required")]
-        public String Ingredients { get; set; }
+        public string Ingredients { get; set; }
 
         [Required(ErrorMessage = "Prepare instructions are required")]
-        public String PrepareInstructions { get; set; }
+        public string PrepareInstructions { get; set; }
 
         [Required(ErrorMessage = "The kind of kitchen is required")]
         public string Kitchens { get; set; }
 
         [Required(ErrorMessage = "What kind of course is required")]
-        public String Course { get; set; }
+        public string Course { get; set; }
 
         [Required(ErrorMessage = "The number of people are required")]
         [Range(1,10 )]
@@ -39,21 +39,14 @@ namespace Lullo.Models.Recepies
 
     public class Course
     {
-        public int CourseId { get; set; }
+        public int RecipeId { get; set; }
         public string CourseName { get; set; }
 
     }
 
     public class Kitchens
     {
-        public int KitchenId { get; set; }
+        public int RecipeId { get; set; }
         public string KitchenName { get; set; }
-    }
-
-    public class SearchViewModel
-    {
-        [DisplayName("search query *")]
-        [Required]
-        public string Query { get; set; }
     }
 }

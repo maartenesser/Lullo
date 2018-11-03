@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,21 +16,36 @@ namespace Lullo.Controllers
         private RecipiesContext db = new RecipiesContext();
 
         // GET: Recipies
-        public ActionResult Index()
+        public ActionResult Index(string search /*,string course*/)
         {
-            return View(db.Recipies.ToList());
-        }
+            var recip = from s in db.Recipies select s;
 
-        [HttpGet]
-        public ActionResult Search(string search)
-        {
-            var result = db.Recipies.Where(q => search.Any(s => q.Name.Contains(s)));
-            //do whatever you need with the parameter, 
-            //like using it as parameter in Linq to Entities or Linq to Sql, etc. 
-            //Suppose your search result will be put in variable "result".
-            ViewData.Model = result;
-            Session["Search"] = true;
-            return View(search);
+
+            //var courseList = new List<string>();
+            //var courseNames = from c in db.Recipies
+            //    orderby c.Course
+            //    select c.Course;
+
+            //courseList.AddRange(courseNames.Distinct());
+            //ViewBag.city = new SelectList(courseList);
+
+
+            //if (!string.IsNullOrWhiteSpace(course))
+            //{
+            //    recip = recip.Where(c => c.Course == course);
+            //}
+
+            //return View(recip.ToList());
+
+            //var recip = from s in db.Recipies select s;
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                //Searches in multiple columns
+                recip = recip.Where(s => s.Name.Contains(search) || s.Ingredients.Contains(search) || s.PrepareInstructions.Contains(search) || s.Kitchens.Contains(search) || s.Course.Contains(search));
+            }
+
+            return View(recip.ToList());
         }
 
         // GET: Recipies/Details/5
