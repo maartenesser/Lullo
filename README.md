@@ -29,13 +29,13 @@ Als je het toch offline wilt proberen moet je in de User view de edit file opene
 
 # User gegevens voor de live versie
 
-###Login gegevens voor de admin
+### Login gegevens voor de admin
 ```
 Email: admin@test.nl
 Ps: test1234
 ```
 
-###Login voor een normale gebruiker
+### Login voor een normale gebruiker
 ```
 Email: user@test.nl
 Ps: test1234
