@@ -15,7 +15,7 @@ Verder is er een bootschappenlijst waar elke huisgenoot bootschappen kan toevoeg
 Letop: Er is geen admin account. Deze is afgeschermt. Je kan het admin account in de live versie bekijken hieronder.
 Als je het toch offline wilt proberen moet je in de User view de edit file openen en deze code onderin toevoegen.
 
-'''
+```
 <div class="form-group">
                      @Html.LabelFor(model => model.IsAdmin, htmlAttributes: new {@class = "control-label col-md-2"})
                      <div class="col-md-10">
@@ -25,7 +25,7 @@ Als je het toch offline wilt proberen moet je in de User view de edit file opene
                          </div>
                      </div>
                  </div>
-'''
+```
 
 # User gegevens voor de live versie
 
