@@ -30,6 +30,7 @@
                     @if (Session["UserID"] != null)
                 {
                     <li>@Html.ActionLink("Grocery List", "Index", "Groceries")</li>
+                    <li>@Html.ActionLink("Recipe List", "Index", "Recipies")</li>                                                         
                     <li>@Html.ActionLink("Account", "LoggedIn", "User")</li>
 
                     if ((bool) Session["IsAdmin"])

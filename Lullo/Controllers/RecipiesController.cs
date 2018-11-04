@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Lullo.Models;
 using Lullo.Models.Recepies;
 
@@ -16,6 +17,7 @@ namespace Lullo.Controllers
         private RecipiesContext db = new RecipiesContext();
 
         // GET: Recipies
+        [NoDirectAccess]
         public ActionResult Index(string search /*,string course*/)
         {
             var recip = from s in db.Recipies select s;
@@ -49,6 +51,7 @@ namespace Lullo.Controllers
         }
 
         // GET: Recipies/Details/5
+        [NoDirectAccess]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -64,6 +67,7 @@ namespace Lullo.Controllers
         }
 
         // GET: Recipies/Create
+        [NoDirectAccess]
         public ActionResult Create()
         {
             return View();
@@ -73,6 +77,7 @@ namespace Lullo.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [NoDirectAccess]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Ingredients,PrepareInstructions,Kitchens,Course,NumberOfPeople,PreparationTime")] Recipies recipies)
         {
@@ -87,6 +92,7 @@ namespace Lullo.Controllers
         }
 
         // GET: Recipies/Edit/5
+        [NoDirectAccess]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -105,6 +111,7 @@ namespace Lullo.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [NoDirectAccess]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Ingredients,PrepareInstructions,Kitchens,Course,NumberOfPeople,PreparationTime")] Recipies recipies)
         {
@@ -118,6 +125,7 @@ namespace Lullo.Controllers
         }
 
         // GET: Recipies/Delete/5
+        [NoDirectAccess]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -133,6 +141,7 @@ namespace Lullo.Controllers
         }
 
         // POST: Recipies/Delete/5
+        [NoDirectAccess]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -150,6 +159,20 @@ namespace Lullo.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+        public class NoDirectAccessAttribute : ActionFilterAttribute
+        {
+            public override void OnActionExecuting(ActionExecutingContext filterContext)
+            {
+                if (filterContext.HttpContext.Request.UrlReferrer == null ||
+                    filterContext.HttpContext.Request.Url.Host != filterContext.HttpContext.Request.UrlReferrer.Host)
+                {
+                    filterContext.Result = new RedirectToRouteResult(new
+                        RouteValueDictionary(new { controller = "Home", action = "Index", area = "" }));
+                }
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Lullo.Models;
 
 namespace Lullo.Controllers
@@ -75,6 +76,7 @@ namespace Lullo.Controllers
 
 
         // GET: User
+        [NoDirectAccess]
         public ActionResult Index(string search)
         {
             if (Session["UserID"] == null)
@@ -102,23 +104,28 @@ namespace Lullo.Controllers
         }
 
         // GET: User/Details/5
+        [NoDirectAccess]
         public ActionResult Details(int? id)
         {
-            if (Session["UserID"] == null)
+            // Zorgt ervoor dat als je ingelogged bent ook niet kan dieplinken.
+            if (Convert.ToInt32(Session["UserID"]) != id)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("LoggedIn");
             }
 
-            if (id == null)
+            if ((bool)Session["IsAdmin"])
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                User user = db.Users.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
+
             }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+
+            return RedirectToAction("Login");
+
         }
 
         // GET: User/Create
@@ -152,6 +159,7 @@ namespace Lullo.Controllers
         }
 
         // GET: User/Edit/5
+        [NoDirectAccess]
         public ActionResult Edit(int? id)
         {
             
@@ -184,6 +192,7 @@ namespace Lullo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [NoDirectAccess]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,ValidatePassword,IsAdmin")] User user)
         {
             //Safeguarding Editable User accounts
@@ -206,6 +215,7 @@ namespace Lullo.Controllers
         }
 
         // GET: User/Delete/5
+        [NoDirectAccess]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -221,6 +231,7 @@ namespace Lullo.Controllers
         }
 
         // POST: User/Delete/5
+        [NoDirectAccess]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -240,4 +251,19 @@ namespace Lullo.Controllers
             base.Dispose(disposing);
         }
     }
+
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    public class NoDirectAccessAttribute : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.UrlReferrer == null ||
+                filterContext.HttpContext.Request.Url.Host != filterContext.HttpContext.Request.UrlReferrer.Host)
+            {
+                filterContext.Result = new RedirectToRouteResult(new
+                    RouteValueDictionary(new { controller = "Home", action = "Index", area = "" }));
+            }
+        }
+    }
+
 }
