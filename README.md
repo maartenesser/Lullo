@@ -13,7 +13,7 @@ Verder is er een bootschappenlijst waar elke huisgenoot bootschappen kan toevoeg
 4. Run de code in visual studio
 
 Letop: Er is geen admin account. Deze is afgeschermt. Je kan het admin account in de live versie bekijken hieronder.
-Als je het toch offline wilt proberen moet je in de User view de edit file openen en deze code onderin toevoegen.
+Als je het toch offline wilt proberen moet je in de User view de edit file openen en deze code onderin toevoegen. Na de form-group van de validatePassword.
 
 ```
 <div class="form-group">
@@ -30,11 +30,15 @@ Als je het toch offline wilt proberen moet je in de User view de edit file opene
 # User gegevens voor de live versie
 
 ###Login gegevens voor de admin
+```
 Email: admin@test.nl
 Ps: test1234
+```
 
 ###Login voor een normale gebruiker
+```
 Email: user@test.nl
 Ps: test1234
+```
 
 Online deployed website: https://lullo.azurewebsites.net/
