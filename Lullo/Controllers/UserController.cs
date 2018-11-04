@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -162,19 +161,7 @@ namespace Lullo.Controllers
         [NoDirectAccess]
         public ActionResult Edit(int? id)
         {
-            
-
-            if (id == null)
-                {
-                    //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    return RedirectToAction("Login");
-                }
-
-            // Zorgt ervoor dat als je ingelogged bent ook niet kan dieplinken.
-            if (Convert.ToInt32(Session["UserID"]) != id)
-            {
-                return RedirectToAction("LoggedIn");
-            }
+    
 
                 User user = db.Users.Find(id);
                 if (user == null)
@@ -195,12 +182,6 @@ namespace Lullo.Controllers
         [NoDirectAccess]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,ValidatePassword,IsAdmin")] User user)
         {
-            //Safeguarding Editable User accounts
-            if (Session["UserID"] == null)
-            {
-                return RedirectToAction("Login");
-            }
-
             if (db.Users.Any(x => x.Id == user.Id))
             {
                 if (ModelState.IsValid)
