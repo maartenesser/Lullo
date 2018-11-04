@@ -490,23 +490,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\EatAtHomeController.cs" />
     <Compile Include="Controllers\GroceriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RecipiesController - Copy.cs" />
     <Compile Include="Controllers\RecipiesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\EatAtHome\EatAtHome.cs" />
-    <Compile Include="Models\EatAtHome\EatAtHomeContext.cs" />
     <Compile Include="Models\Groceries\Groceries.cs" />
     <Compile Include="Models\Groceries\GroceriesContext.cs" />
     <Compile Include="Models\Recepies\Recipies.cs" />
-    <Compile Include="Models\Recepies\RecipeContext.cs" />
-    <Compile Include="Models\RecipiesContext.cs" />
-    <Compile Include="Models\SearchViewModel.cs" />
+    <Compile Include="Models\Recepies\RecipiesContext.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="Models\Users\UserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -604,17 +598,11 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\LoggedIn.cshtml" />
-    <Content Include="Views\EatAtHome\Create.cshtml" />
-    <Content Include="Views\EatAtHome\Delete.cshtml" />
-    <Content Include="Views\EatAtHome\Details.cshtml" />
-    <Content Include="Views\EatAtHome\Edit.cshtml" />
-    <Content Include="Views\EatAtHome\Index.cshtml" />
     <Content Include="Views\Recipies\Create.cshtml" />
     <Content Include="Views\Recipies\Delete.cshtml" />
     <Content Include="Views\Recipies\Details.cshtml" />
     <Content Include="Views\Recipies\Edit.cshtml" />
     <Content Include="Views\Recipies\Index.cshtml" />
-    <Content Include="Views\Recipies\Index - Copy.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
